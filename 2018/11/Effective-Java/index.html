@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/fish-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/fish-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"macans.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Creating and Destroying Objects Consider static factory methods instead of constructors Consider a builder when faced with many constructor parameters Enforce the singleton property with a private con">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Java">
+<meta property="og:url" content="macans.github.io/2018/11/Effective-Java/index.html">
+<meta property="og:site_name" content="Macan&#39;s Blog">
+<meta property="og:description" content="Creating and Destroying Objects Consider static factory methods instead of constructors Consider a builder when faced with many constructor parameters Enforce the singleton property with a private con">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-12T19:10:20.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective Java">
+<meta name="twitter:description" content="Creating and Destroying Objects Consider static factory methods instead of constructors Consider a builder when faced with many constructor parameters Enforce the singleton property with a private con">
+
+<link rel="canonical" href="macans.github.io/2018/11/Effective-Java/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Effective Java | Macan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Macan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">chaotic thoughts</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="macans.github.io/2018/11/Effective-Java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Macan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Macan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Effective Java
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-02 00:42:42" itemprop="dateCreated datePublished" datetime="2018-11-02T00:42:42+08:00">2018-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-13 03:10:20" itemprop="dateModified" datetime="2020-05-13T03:10:20+08:00">2020-05-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Creating-and-Destroying-Objects"><a href="#Creating-and-Destroying-Objects" class="headerlink" title="Creating and Destroying Objects"></a>Creating and Destroying Objects</h2><ol>
+<li>Consider static factory methods instead of constructors</li>
+<li>Consider a builder when faced with many constructor parameters</li>
+<li>Enforce the singleton property with a private constructor or an enum type</li>
+</ol>
+<a id="more"></a>
+<ol start="4">
+<li>Enforce non-instantiated with a private constructor </li>
+<li>Prefer dependency injection to hard-writing resources</li>
+<li>Avoid creating unnecessary objects.</li>
+<li>Eliminate obsolete object references</li>
+<li>Avoid finalizers and cleaners</li>
+<li>Prefer try-with-resources to <strong>try-finally</strong></li>
+</ol>
+<h2 id="Methods-Common-to-All-Objects"><a href="#Methods-Common-to-All-Objects" class="headerlink" title="Methods Common to All Objects"></a>Methods Common to All Objects</h2><ol start="10">
+<li>Obey the general contract when overriding <strong>equals</strong></li>
+<li>Always override <strong>hashCode</strong> when you override <strong>equals</strong></li>
+<li>Always override <strong>toString</strong></li>
+<li>Override <strong>clone</strong> judiciously</li>
+<li>Considering implementing <strong>Comparable</strong></li>
+</ol>
+<h2 id="Classes-and-Interfaces"><a href="#Classes-and-Interfaces" class="headerlink" title="Classes and Interfaces"></a>Classes and Interfaces</h2><ol start="15">
+<li>Minimize the accessibility of classes and members</li>
+<li>In public classes, use accessor methods, not public fields</li>
+<li>Minimize mutability</li>
+<li>Favor composition over inheritance</li>
+<li>Design and document for inheritance or else prohibit it</li>
+</ol>
+<ul>
+<li>Good API documentation should describe what a given method does and not how it does it.</li>
+</ul>
+<ol start="20">
+<li>Prefer interfaces to abstract classes</li>
+<li>Design interfaces for posterity</li>
+<li>Use interfaces only to define types</li>
+<li>Prefer class hierarchies to tagged classes</li>
+<li>Favor static member classes over non-static</li>
+<li>Limit source files to a single top-level class</li>
+</ol>
+<h2 id="Generics"><a href="#Generics" class="headerlink" title="Generics"></a>Generics</h2><ol start="26">
+<li>Don’t use raw types</li>
+<li>Eliminate unchecked warnings</li>
+<li>Prefer lists to arrays</li>
+<li>Favor generic types</li>
+<li>Favor generic methods</li>
+<li>Use bounded wildcard to increase API flexibility</li>
+<li>Combine generics and var-args judiciously</li>
+<li>Consider type safe heterogeneous containers</li>
+</ol>
+<h2 id="Enums-and-Annotations"><a href="#Enums-and-Annotations" class="headerlink" title="Enums and Annotations"></a>Enums and Annotations</h2><ol start="34">
+<li>Use enums instead of int constants</li>
+<li>USe instance fields instead of ordinals</li>
+<li>Use <strong>EnumSet</strong> instead of bit fields</li>
+<li>Use <strong>EnumMap</strong> instead of ordinal indexing</li>
+<li>Emulate extensible enums with interfaces</li>
+<li>Prefer annotations to naming patterns</li>
+<li>Consistently use the <strong>Override</strong> annotations</li>
+<li>Use marker interfaces to define types</li>
+</ol>
+<h2 id="Lambdas-and-Streams"><a href="#Lambdas-and-Streams" class="headerlink" title="Lambdas and Streams"></a>Lambdas and Streams</h2><ol start="42">
+<li>Prefer lambdas to anonymous classes</li>
+<li>Prefer method references to lambdas</li>
+<li>Favor the use of standard functional interfaces</li>
+<li>Use stream judiciously</li>
+<li>Prefer side-effect-free functions in streams</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/10/旅行商问题/" rel="prev" title="旅行商问题">
+      <i class="fa fa-chevron-left"></i> 旅行商问题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/Refactoring/" rel="next" title="Refactoring">
+      Refactoring <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-and-Destroying-Objects"><span class="nav-number">1.</span> <span class="nav-text">Creating and Destroying Objects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-Common-to-All-Objects"><span class="nav-number">2.</span> <span class="nav-text">Methods Common to All Objects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Classes-and-Interfaces"><span class="nav-number">3.</span> <span class="nav-text">Classes and Interfaces</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generics"><span class="nav-number">4.</span> <span class="nav-text">Generics</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enums-and-Annotations"><span class="nav-number">5.</span> <span class="nav-text">Enums and Annotations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lambdas-and-Streams"><span class="nav-number">6.</span> <span class="nav-text">Lambdas and Streams</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Macan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/macans" title="GitHub → https://github.com/macans" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.cn/u/2278929810" title="Weibo → https://weibo.cn/u/2278929810" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Macan</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

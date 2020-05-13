@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/fish-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/fish-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"macans.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="背景Lisp是第一门真正使用内存动态分配和垃圾收集技术的语言，主要思考三个问题">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="话说Garbage Collection">
+<meta property="og:url" content="macans.github.io/2018/08/话说Garbage-Collection/index.html">
+<meta property="og:site_name" content="Macan&#39;s Blog">
+<meta property="og:description" content="背景Lisp是第一门真正使用内存动态分配和垃圾收集技术的语言，主要思考三个问题">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-05-12T19:10:20.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="话说Garbage Collection">
+<meta name="twitter:description" content="背景Lisp是第一门真正使用内存动态分配和垃圾收集技术的语言，主要思考三个问题">
+
+<link rel="canonical" href="macans.github.io/2018/08/话说Garbage-Collection/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>话说Garbage Collection | Macan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Macan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">chaotic thoughts</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="macans.github.io/2018/08/话说Garbage-Collection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Macan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Macan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          话说Garbage Collection
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-21 23:19:34" itemprop="dateCreated datePublished" datetime="2018-08-21T23:19:34+08:00">2018-08-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-13 03:10:20" itemprop="dateModified" datetime="2020-05-13T03:10:20+08:00">2020-05-13</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>Lisp是第一门真正使用内存动态分配和垃圾收集技术的语言，主要思考三个问题<br><a id="more"></a>  </p>
+<ol>
+<li>哪些内存需要回收？</li>
+<li>什么时候回收？</li>
+<li>怎么回收？</li>
+</ol>
+<p>程序计数器，虚拟机栈，本地方法栈和线程的生命周期一致，每一个栈帧分配多少内存基本上是类确定时就已知了（运行时编译器会有一些优化），所以这几个区域的内存分配和回收的事件和方式都确定了。GC主要考虑堆和方法区的内存。</p>
+<h2 id="对象存活判断"><a href="#对象存活判断" class="headerlink" title="对象存活判断"></a>对象存活判断</h2><h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p>引用计数是最简单的一种自动内存管理机制，实现很简单但是不能解决对象间互相引用的问题。如下面这段代码</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style><code class="language-java">class ReferenceCountingGC {
+    public Object instance = null;
+}
+
+public class Main {
+    private static final int _1MB = 1024 * 1024;
+    private byte[] bigSize = new byte[2 * _1MB];
+
+    public static void main(String[] args) {
+        ReferenceCountingGC a = new ReferenceCountingGC();
+        ReferenceCountingGC b = new ReferenceCountingGC();
+        a.instance = b; &#x2F;&#x2F;ref_count(b)=1
+        b.instance = a; &#x2F;&#x2F;ref_count(a)=1
+        a = null;
+        b = null;
+        System.gc();
+    }
+}
+</code></pre>
+<p>执行时注意要打开JVM Option</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style><code class="language-java">-XX:+PrintGC
+-XX:+PrintGCDetails
+-XX:+PrintGCTimeStamps
+-XX:+PrintGCDateStamps
+-XX:+PrintHeapAtGC
+</code></pre>
+<p>执行结果，若采用引用计数，a和b的内存就不会被释放了</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style><code class="language-shell">0.216: [GC (System.gc()) [PSYoungGen: 3938K-&gt;496K(76288K)] 3938K-&gt;504K(251392K), 0.0023479 secs] [Times: user=0.00 sys=0.00, real=0.01 secs] 
+0.218: [Full GC (System.gc()) [PSYoungGen: 496K-&gt;0K(76288K)] [ParOldGen: 8K-&gt;401K(175104K)] 504K-&gt;401K(251392K), [Metaspace: 3243K-&gt;3243K(1056768K)], 0.0152900 secs] [Times: user=0.01 sys=0.00, real=0.01 secs] 
+Heap
+ PSYoungGen      total 76288K, used 1966K [0x000000076ab00000, 0x0000000770000000, 0x00000007c0000000)
+  eden space 65536K, 3% used [0x000000076ab00000,0x000000076aceb9e0,0x000000076eb00000)
+  from space 10752K, 0% used [0x000000076eb00000,0x000000076eb00000,0x000000076f580000)
+  to   space 10752K, 0% used [0x000000076f580000,0x000000076f580000,0x0000000770000000)
+ ParOldGen       total 175104K, used 401K [0x00000006c0000000, 0x00000006cab00000, 0x000000076ab00000)
+  object space 175104K, 0% used [0x00000006c0000000,0x00000006c0064410,0x00000006cab00000)
+ Metaspace       used 3265K, capacity 4496K, committed 4864K, reserved 1056768K
+  class space    used 359K, capacity 388K, committed 512K, reserved 1048576K
+</code></pre>
+<p>引用计数如何实现的伪代码</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style><code class="language-c++">New(): &#x2F;&#x2F;分配内存
+    ref &lt;- allocate()
+    if ref == null
+        error &quot;Out of memory&quot;
+    rc(ref) &lt;- 0  &#x2F;&#x2F;将ref的引用计数(reference counting)设置为0
+    return ref
+
+atomic Write(dest, ref) &#x2F;&#x2F;更新对象的引用
+    addReference(ref)
+    deleteReference(dest)
+    dest &lt;- ref
+
+addReference(ref):
+    if ref != null
+        rc(ref) &lt;- rc(ref)+1
+
+deleteReference(ref):
+    if ref != null
+        rc(ref) &lt;- rc(ref) -1
+        if rc(ref) == 0 &#x2F;&#x2F;如果当前ref的引用计数为0，则表明其将要被回收
+            for each fld in Pointers(ref)
+                deleteReference(*fld)
+            free(ref) &#x2F;&#x2F;释放ref指向的内存空间
+</code></pre>
+<h3 id="可达性分析"><a href="#可达性分析" class="headerlink" title="可达性分析"></a>可达性分析</h3><p>将某些对象作为GC Roots<br>可以作为GC Roots的对象有：虚拟机栈中引用的对象，方法区中类静态属性和常量引用的对象，本地方法栈中JNI引用的对象<br>强引用，软引用，若引用，虚引用</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/怎样阅读一本书/" rel="prev" title="怎样阅读一本书">
+      <i class="fa fa-chevron-left"></i> 怎样阅读一本书
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/子序列相关问题/" rel="next" title="子序列相关问题">
+      子序列相关问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象存活判断"><span class="nav-number">2.</span> <span class="nav-text">对象存活判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数"><span class="nav-number">2.1.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可达性分析"><span class="nav-number">2.2.</span> <span class="nav-text">可达性分析</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Macan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/macans" title="GitHub → https://github.com/macans" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.cn/u/2278929810" title="Weibo → https://weibo.cn/u/2278929810" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Macan</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

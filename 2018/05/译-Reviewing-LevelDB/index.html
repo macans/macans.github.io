@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/fish-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/fish-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"macans.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Reviewing LevelDBI. What is this all abouthttps://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about LevelDB是  是Google开发的高速键值对存储库，提供有序的任意字符串之前的键值映射。  这是项目自身给出的定义。LevelDB为用户提供了一种高效存">
+<meta name="keywords" content="LevelDB,C&#x2F;C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[译] Reviewing LevelDB">
+<meta property="og:url" content="macans.github.io/2018/05/译-Reviewing-LevelDB/index.html">
+<meta property="og:site_name" content="Macan&#39;s Blog">
+<meta property="og:description" content="Reviewing LevelDBI. What is this all abouthttps://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about LevelDB是  是Google开发的高速键值对存储库，提供有序的任意字符串之前的键值映射。  这是项目自身给出的定义。LevelDB为用户提供了一种高效存">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://ayende.com/blog/Images/Windows-Live-Writer/Reviewing-LevelDB-Part-I-What-is-this-al_87BA/image_4.png">
+<meta property="og:updated_time" content="2020-05-13T16:54:38.605Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[译] Reviewing LevelDB">
+<meta name="twitter:description" content="Reviewing LevelDBI. What is this all abouthttps://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about LevelDB是  是Google开发的高速键值对存储库，提供有序的任意字符串之前的键值映射。  这是项目自身给出的定义。LevelDB为用户提供了一种高效存">
+<meta name="twitter:image" content="https://ayende.com/blog/Images/Windows-Live-Writer/Reviewing-LevelDB-Part-I-What-is-this-al_87BA/image_4.png">
+
+<link rel="canonical" href="macans.github.io/2018/05/译-Reviewing-LevelDB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[译] Reviewing LevelDB | Macan's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Macan's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">chaotic thoughts</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="macans.github.io/2018/05/译-Reviewing-LevelDB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Macan">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Macan's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [译] Reviewing LevelDB
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-12 15:04:39" itemprop="dateCreated datePublished" datetime="2018-05-12T15:04:39+08:00">2018-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-05-14 00:54:38" itemprop="dateModified" datetime="2020-05-14T00:54:38+08:00">2020-05-14</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Reviewing-LevelDB"><a href="#Reviewing-LevelDB" class="headerlink" title="Reviewing LevelDB"></a>Reviewing LevelDB</h1><h2 id="I-What-is-this-all-about"><a href="#I-What-is-this-all-about" class="headerlink" title="I. What is this all about"></a>I. What is this all about</h2><p><a href="https://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about" target="_blank" rel="noopener">https://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about</a></p>
+<p>LevelDB是</p>
+<blockquote>
+<p>是Google开发的高速键值对存储库，提供有序的任意字符串之前的键值映射。</p>
+</blockquote>
+<p>这是项目自身给出的定义。LevelDB为用户提供了一种高效存储数据的方式，不是基于SQL的数据库，实际上连真正的数据库也算不上，而只是构建数据库时的一些模块，用来处理对磁盘的读写操作，支持原子性操作。其他的方面则取决于研发人员自己（不管是事务管理还是更复杂的功能）<br><a id="more"></a><br>对于我们需要做的事情而言，LevelDB很完美。我决定开始了解项目的代码库，尤其是现在我都不能编译成功。</p>
+<p>项目用C++实现，研发人员以C++为生可能是项目使用C++的一个原因。我感觉源码的质量将会很高，所以我不妨在学习源码的时候同时提升我的C++水平。</p>
+<p><img src="https://ayende.com/blog/Images/Windows-Live-Writer/Reviewing-LevelDB-Part-I-What-is-this-al_87BA/image_4.png" alt="Methods"></p>
+<p>显示出来的只是很小的一部分，你可能也感觉到了，这些是我感兴趣的。它使得我们理解起来更容易，我们随后就来看一下背后复杂的逻辑实现。</p>
+<h2 id="II-Put-some-data-on-the-disk"><a href="#II-Put-some-data-on-the-disk" class="headerlink" title="II. Put some data on the disk"></a>II. Put some data on the disk</h2><p>我认为我们首先要做的是分析LevelDB到底怎么把数据写到磁盘中的。为此，我们决定追踪方法Put的调用过程。</p>
+<p>我们从客户端代码开始</p>
+
+<!-- Has Prism -->
+<pre class="line-numbers" style><code class="language-cpp">leveldb::DB *db;
+leveldb::Options options;
+options.create_if_missing = true;
+leveldb::DB::Open(options, &quot;test_db&quot;, &amp;db);
+leveldb::Status status = db-&gt;Put(leveldb::WriteOptions(), &quot;key1&quot;, &quot;value1&quot;);
+std::cout &lt;&lt; status.ok() &lt;&lt; std::endl;
+</code></pre>
+<p>DB::Put的实现<br>
+<!-- Has Prism -->
+<pre class="line-numbers" style><code class="language-cpp">&#x2F;&#x2F; Default implementations of convenience methods that subclasses of DB
+&#x2F;&#x2F; can call if they wish
+Status DB::Put(const WriteOptions&amp; opt, const Slice&amp; key, const Slice&amp; value) {
+  WriteBatch batch;
+  batch.Put(key, value);
+  return Write(opt, &amp;batch);
+}
+
+Status DB::Delete(const WriteOptions&amp; opt, const Slice&amp; key) {
+  WriteBatch batch;
+  batch.Delete(key);
+  return Write(opt, &amp;batch);
+}
+</code></pre></p>
+<p>上面也包括了Delete方法，旨在说明重要的一点，就是所有的修改都会用到WriteBatch<br>
+<!-- Has Prism -->
+<pre class="line-numbers" style><code class="language-cpp">Status DBImpl::Write(const WriteOptions&amp; options, WriteBatch* my_batch) {
+  Writer w(&amp;mutex_);
+  w.batch = my_batch;
+  w.sync = options.sync;
+  w.done = false;
+
+  MutexLock l(&amp;mutex_);
+  writers_.push_back(&amp;w);
+  while (!w.done &amp;&amp; &amp;w != writers_.front()) {
+    w.cv.Wait();
+  }
+  if (w.done) {
+    return w.status;
+  }
+
+  &#x2F;&#x2F; May temporarily unlock and wait.
+  Status status = MakeRoomForWrite(my_batch == nullptr);
+  uint64_t last_sequence = versions_-&gt;LastSequence();
+  Writer* last_writer = &amp;w;
+  if (status.ok() &amp;&amp; my_batch != nullptr) {  &#x2F;&#x2F; nullptr batch is for compactions
+    WriteBatch* updates = BuildBatchGroup(&amp;last_writer);
+    WriteBatchInternal::SetSequence(updates, last_sequence + 1);
+    last_sequence += WriteBatchInternal::Count(updates);
+
+    &#x2F;&#x2F; Add to log and apply to memtable.  We can release the lock
+    &#x2F;&#x2F; during this phase since &amp;w is currently responsible for logging
+    &#x2F;&#x2F; and protects against concurrent loggers and concurrent writes
+    &#x2F;&#x2F; into mem_.
+    {
+      mutex_.Unlock();
+      status = log_-&gt;AddRecord(WriteBatchInternal::Contents(updates));
+      bool sync_error = false;
+      if (status.ok() &amp;&amp; options.sync) {
+        status = logfile_-&gt;Sync();
+        if (!status.ok()) {
+          sync_error = true;
+        }
+      }
+      if (status.ok()) {
+        status = WriteBatchInternal::InsertInto(updates, mem_);
+      }
+      mutex_.Lock();
+      if (sync_error) {
+        &#x2F;&#x2F; The state of the log file is indeterminate: the log record we
+        &#x2F;&#x2F; just added may or may not show up when the DB is re-opened.
+        &#x2F;&#x2F; So we force the DB into a mode where all future writes fail.
+        RecordBackgroundError(status);
+      }
+    }
+    if (updates == tmp_batch_) tmp_batch_-&gt;Clear();
+
+    versions_-&gt;SetLastSequence(last_sequence);
+  }
+
+  while (true) {
+    Writer* ready = writers_.front();
+    writers_.pop_front();
+    if (ready != &amp;w) {
+      ready-&gt;status = status;
+      ready-&gt;done = true;
+      ready-&gt;cv.Signal();
+    }
+    if (ready == last_writer) break;
+  }
+
+  &#x2F;&#x2F; Notify new head of write queue
+  if (!writers_.empty()) {
+    writers_.front()-&gt;cv.Signal();
+  }
+
+  return status;
+}
+</code></pre></p>
+<p>再看下Writer的定义<br>
+<!-- Has Prism -->
+<pre class="line-numbers" style><code class="language-cpp">&#x2F;&#x2F; Information kept for every waiting writer
+struct DBImpl::Writer {
+  Status status;
+  WriteBatch* batch;
+  bool sync;
+  bool done;
+  port::CondVar cv;
+
+  explicit Writer(port::Mutex* mu) : cv(mu) { }
+};
+</code></pre></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LevelDB/" rel="tag"># LevelDB</a>
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/LevelDB 源码分析/" rel="prev" title="LevelDB 源码分析">
+      <i class="fa fa-chevron-left"></i> LevelDB 源码分析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/08/分布式系统一致性协议/" rel="next" title="分布式系统一致性协议">
+      分布式系统一致性协议 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Reviewing-LevelDB"><span class="nav-number">1.</span> <span class="nav-text">Reviewing LevelDB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#I-What-is-this-all-about"><span class="nav-number">1.1.</span> <span class="nav-text">I. What is this all about</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-Put-some-data-on-the-disk"><span class="nav-number">1.2.</span> <span class="nav-text">II. Put some data on the disk</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Macan</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/macans" title="GitHub → https://github.com/macans" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.cn/u/2278929810" title="Weibo → https://weibo.cn/u/2278929810" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Macan</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
