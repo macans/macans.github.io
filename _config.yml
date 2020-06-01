@@ -4,7 +4,7 @@
 
 # Site
 title: Macan's Blog
-subtitle: 争取个人的自由，就是争取国家的自由
+subtitle: chaotic thoughts
 description:
 author: Macan
 language: en
@@ -73,6 +73,13 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
+
+# Syntax Highlight
+prism_plugin:
+  mode: 'preprocess'    # realtime/preprocess
+  theme: 'default'
+  line_number: true    # default false
+  custom_css: '/css/Darcula.css'     # optional
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

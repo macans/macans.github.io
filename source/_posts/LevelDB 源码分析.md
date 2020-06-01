@@ -6,6 +6,7 @@ tags: [分布式, 数据库]
 [Condition Variable与Mutex的比较](https://www.gnu.org/software/guile/manual/html_node/Mutexes-and-Condition-Variables.html)
 Mutexes are low-level primitives used to coordinate concurrent access to mutable data.If one thread has locked a mutex, then another thread attempting to lock that same mutex will wait until the first thread is done
 https://en.cppreference.com/w/cpp/thread/condition_variable
+
 <!-- more -->  
 
 [reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast) 
