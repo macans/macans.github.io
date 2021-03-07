@@ -82,11 +82,12 @@ prism_plugin:
   custom_css: '/css/Darcula.css'     # optional
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
+## Docs: <https://hexo.io/docs/one-command-deployment.html>
 deploy:
   type: git
   repo: git@github.com:macans/macans.github.io.git
   branch: master
+  message: Update at {{now('YYYY/MM/DD HH:mm:ss')}}
 
 jsonContent:
   meta: false
