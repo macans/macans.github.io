@@ -209,12 +209,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Reviewing-LevelDB"><a href="#Reviewing-LevelDB" class="headerlink" title="Reviewing LevelDB"></a>Reviewing LevelDB</h1><h2 id="I-What-is-this-all-about"><a href="#I-What-is-this-all-about" class="headerlink" title="I. What is this all about"></a>I. What is this all about</h2><p><a href="https://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about" target="_blank" rel="noopener">https://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about</a></p>
+        <h1 id="Reviewing-LevelDB"><a href="#Reviewing-LevelDB" class="headerlink" title="Reviewing LevelDB"></a>Reviewing LevelDB</h1><h2 id="I-What-is-this-all-about"><a href="#I-What-is-this-all-about" class="headerlink" title="I. What is this all about"></a>I. What is this all about</h2><p><a target="_blank" rel="noopener" href="https://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about">https://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about</a></p>
 <p>LevelDB是</p>
 <blockquote>
 <p>是Google开发的高速键值对存储库，提供有序的任意字符串之前的键值映射。</p>
 </blockquote>
-<p>这是项目自身给出的定义。LevelDB为用户提供了一种高效存储数据的方式，不是基于SQL的数据库，实际上连真正的数据库也算不上，而只是构建数据库时的一些模块，用来处理对磁盘的读写操作，支持原子性操作。其他的方面则取决于研发人员自己（不管是事务管理还是更复杂的功能）<br><a id="more"></a><br>对于我们需要做的事情而言，LevelDB很完美。我决定开始了解项目的代码库，尤其是现在我都不能编译成功。</p>
+<p>这是项目自身给出的定义。LevelDB为用户提供了一种高效存储数据的方式，不是基于SQL的数据库，实际上连真正的数据库也算不上，而只是构建数据库时的一些模块，用来处理对磁盘的读写操作，支持原子性操作。其他的方面则取决于研发人员自己（不管是事务管理还是更复杂的功能）<br><span id="more"></span><br>对于我们需要做的事情而言，LevelDB很完美。我决定开始了解项目的代码库，尤其是现在我都不能编译成功。</p>
 <p>项目用C++实现，研发人员以C++为生可能是项目使用C++的一个原因。我感觉源码的质量将会很高，所以我不妨在学习源码的时候同时提升我的C++水平。</p>
 <p><img src="https://ayende.com/blog/Images/Windows-Live-Writer/Reviewing-LevelDB-Part-I-What-is-this-al_87BA/image_4.png" alt="Methods"></p>
 <p>显示出来的只是很小的一部分，你可能也感觉到了，这些是我感兴趣的。它使得我们理解起来更容易，我们随后就来看一下背后复杂的逻辑实现。</p>
@@ -222,116 +222,23 @@
 <p>我们从客户端代码开始</p>
 
 <!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-cpp">leveldb::DB *db;
-leveldb::Options options;
-options.create_if_missing = true;
-leveldb::DB::Open(options, &quot;test_db&quot;, &amp;db);
-leveldb::Status status = db-&gt;Put(leveldb::WriteOptions(), &quot;key1&quot;, &quot;value1&quot;);
-std::cout &lt;&lt; status.ok() &lt;&lt; std::endl;
+<pre class="{{ pre_class }}" style="{{ pre_style }}" {{ data_attr }}><code class="language-&#123;&#123; lang &#125;&#125;">
+&#123;&#123;- code -&#125;&#125;
 </code></pre>
 <p>DB::Put的实现<br>
 <!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-cpp">&#x2F;&#x2F; Default implementations of convenience methods that subclasses of DB
-&#x2F;&#x2F; can call if they wish
-Status DB::Put(const WriteOptions&amp; opt, const Slice&amp; key, const Slice&amp; value) {
-  WriteBatch batch;
-  batch.Put(key, value);
-  return Write(opt, &amp;batch);
-}
-
-Status DB::Delete(const WriteOptions&amp; opt, const Slice&amp; key) {
-  WriteBatch batch;
-  batch.Delete(key);
-  return Write(opt, &amp;batch);
-}
+<pre class="{{ pre_class }}" style="{{ pre_style }}" {{ data_attr }}><code class="language-&#123;&#123; lang &#125;&#125;">
+&#123;&#123;- code -&#125;&#125;
 </code></pre></p>
 <p>上面也包括了Delete方法，旨在说明重要的一点，就是所有的修改都会用到WriteBatch<br>
 <!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-cpp">Status DBImpl::Write(const WriteOptions&amp; options, WriteBatch* my_batch) {
-  Writer w(&amp;mutex_);
-  w.batch = my_batch;
-  w.sync = options.sync;
-  w.done = false;
-
-  MutexLock l(&amp;mutex_);
-  writers_.push_back(&amp;w);
-  while (!w.done &amp;&amp; &amp;w != writers_.front()) {
-    w.cv.Wait();
-  }
-  if (w.done) {
-    return w.status;
-  }
-
-  &#x2F;&#x2F; May temporarily unlock and wait.
-  Status status = MakeRoomForWrite(my_batch == nullptr);
-  uint64_t last_sequence = versions_-&gt;LastSequence();
-  Writer* last_writer = &amp;w;
-  if (status.ok() &amp;&amp; my_batch != nullptr) {  &#x2F;&#x2F; nullptr batch is for compactions
-    WriteBatch* updates = BuildBatchGroup(&amp;last_writer);
-    WriteBatchInternal::SetSequence(updates, last_sequence + 1);
-    last_sequence += WriteBatchInternal::Count(updates);
-
-    &#x2F;&#x2F; Add to log and apply to memtable.  We can release the lock
-    &#x2F;&#x2F; during this phase since &amp;w is currently responsible for logging
-    &#x2F;&#x2F; and protects against concurrent loggers and concurrent writes
-    &#x2F;&#x2F; into mem_.
-    {
-      mutex_.Unlock();
-      status = log_-&gt;AddRecord(WriteBatchInternal::Contents(updates));
-      bool sync_error = false;
-      if (status.ok() &amp;&amp; options.sync) {
-        status = logfile_-&gt;Sync();
-        if (!status.ok()) {
-          sync_error = true;
-        }
-      }
-      if (status.ok()) {
-        status = WriteBatchInternal::InsertInto(updates, mem_);
-      }
-      mutex_.Lock();
-      if (sync_error) {
-        &#x2F;&#x2F; The state of the log file is indeterminate: the log record we
-        &#x2F;&#x2F; just added may or may not show up when the DB is re-opened.
-        &#x2F;&#x2F; So we force the DB into a mode where all future writes fail.
-        RecordBackgroundError(status);
-      }
-    }
-    if (updates == tmp_batch_) tmp_batch_-&gt;Clear();
-
-    versions_-&gt;SetLastSequence(last_sequence);
-  }
-
-  while (true) {
-    Writer* ready = writers_.front();
-    writers_.pop_front();
-    if (ready != &amp;w) {
-      ready-&gt;status = status;
-      ready-&gt;done = true;
-      ready-&gt;cv.Signal();
-    }
-    if (ready == last_writer) break;
-  }
-
-  &#x2F;&#x2F; Notify new head of write queue
-  if (!writers_.empty()) {
-    writers_.front()-&gt;cv.Signal();
-  }
-
-  return status;
-}
+<pre class="{{ pre_class }}" style="{{ pre_style }}" {{ data_attr }}><code class="language-&#123;&#123; lang &#125;&#125;">
+&#123;&#123;- code -&#125;&#125;
 </code></pre></p>
 <p>再看下Writer的定义<br>
 <!-- Has Prism -->
-<pre class="line-numbers" style><code class="language-cpp">&#x2F;&#x2F; Information kept for every waiting writer
-struct DBImpl::Writer {
-  Status status;
-  WriteBatch* batch;
-  bool sync;
-  bool done;
-  port::CondVar cv;
-
-  explicit Writer(port::Mutex* mu) : cv(mu) { }
-};
+<pre class="{{ pre_class }}" style="{{ pre_style }}" {{ data_attr }}><code class="language-&#123;&#123; lang &#125;&#125;">
+&#123;&#123;- code -&#125;&#125;
 </code></pre></p>
 
     </div>

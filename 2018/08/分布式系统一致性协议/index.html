@@ -206,7 +206,7 @@
 
       
         <h2 id="Two-Phase-Commit"><a href="#Two-Phase-Commit" class="headerlink" title="Two-Phase Commit"></a>Two-Phase Commit</h2><p>二阶段提交，分布式系统架构下保证所有节点在事务处理中保持原子性和一致性而设计的一种算法。一个事务跨越多个节点时，为了保证事物的ACID特性，需要引入一个作为Coordinator来控制所有Cohorts的处理结果，总体的思路就是：Cohorts将操作结果通知Coordinator，Coordinator根据所有Cohorts的结果判断是否提交或者中止操作。</p>
-<a id="more"></a>  
+<span id="more"></span>  
 <p><strong>阶段一</strong><br>进行事务询问，Cohorts执行事务，将Undo和Redo信息记入事务日志，然后向Coordinator反馈结果<br><strong>阶段二</strong><br>分两种情况，执行事务或者中断事务。首先提交事务或者中断请求，然后进行事务或者回滚的提交，提交完后反馈结果。</p>
 <p>分析：2PC原理简单，实现也不复杂，缺点主要有同步阻塞，单点问题，容错性不足导致数据不一致</p>
 <h2 id="Three-Phase-Commit"><a href="#Three-Phase-Commit" class="headerlink" title="Three-Phase Commit"></a>Three-Phase Commit</h2><p>三阶段提交是2PC的改进版<br><strong>阶段一：CanCommit</strong><br>询问事务，反馈给Coordinator</p>
@@ -234,10 +234,10 @@
 <h2 id="Chubby"><a href="#Chubby" class="headerlink" title="Chubby"></a>Chubby</h2><p>Chubby使Paxos第一次从论文中走进工业界，但是Chubby并没有开源</p>
 <h2 id="Vector-Clock"><a href="#Vector-Clock" class="headerlink" title="Vector Clock"></a>Vector Clock</h2><p>Paxos与VectorClock的异同</p>
 <h2 id="Reference-Link"><a href="#Reference-Link" class="headerlink" title="Reference Link"></a>Reference Link</h2><ol>
-<li><a href="https://lamport.azurewebsites.net/pubs/paxos-simple.pdf" target="_blank" rel="noopener">https://lamport.azurewebsites.net/pubs/paxos-simple.pdf</a></li>
-<li><a href="https://book.douban.com/subject/26292004/" target="_blank" rel="noopener">https://book.douban.com/subject/26292004/</a></li>
-<li><a href="https://stackoverflow.com/questions/43554164/" target="_blank" rel="noopener">https://stackoverflow.com/questions/43554164/</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Vector_clock" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Vector_clock</a></li>
+<li><a target="_blank" rel="noopener" href="https://lamport.azurewebsites.net/pubs/paxos-simple.pdf">https://lamport.azurewebsites.net/pubs/paxos-simple.pdf</a></li>
+<li><a target="_blank" rel="noopener" href="https://book.douban.com/subject/26292004/">https://book.douban.com/subject/26292004/</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/43554164/">https://stackoverflow.com/questions/43554164/</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Vector_clock">https://en.wikipedia.org/wiki/Vector_clock</a></li>
 </ol>
 
     </div>
