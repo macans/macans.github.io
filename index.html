@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Tahoma:300,300italic,400,400italic,700,700italic|Amazon Ember:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
@@ -156,65 +156,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/08/%E6%B5%85%E6%9E%90-Guava-%E4%B8%AD%E7%9A%84-RangeMap/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/08/%E6%B5%85%E6%9E%90-Guava-%E4%B8%AD%E7%9A%84-RangeMap/" class="post-title-link" itemprop="url">浅析 Guava 中的 RangeMap</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-08-12 15:35:02 / Modified: 15:35:09" itemprop="dateCreated datePublished" datetime="2021-08-12T15:35:02+08:00">2021-08-12</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>RangeMap </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/08/Daily/2021-08-09/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -246,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-10 09:55:16" itemprop="dateModified" datetime="2021-08-10T09:55:16+08:00">2021-08-10</time>
+                <time title="Modified: 2021-09-13 09:53:05" itemprop="dateModified" datetime="2021-09-13T09:53:05+08:00">2021-09-13</time>
               </span>
 
           
@@ -261,26 +202,15 @@
 
       
           <p>我不能写就转载别人写的好文章。这是微软的沈向洋 2018 年发表在 LinkedIn 上的一篇文章，原文叫 You are what you write，下面是新智元在转载时的译文。</p>
-<p>推特、PPT、Facebook、Instagram和短信是否会削弱人类思考能力？</p>
-<p>中文里有句谚语“见文如见人”，字面意思是“阅读文件，就像看见了作者”。如果我们所写的文字代表了我们自身，那么作为一个社会整体，我们会变成谁？</p>
-<p>我最近正在参与了一次技术审查，听见一位审议员对正在展示的工程师各种盘问：你为什么选择那个设计？为什么服务显示不好的结果？有多少用户将切换到解决方案？</p>
-<p>那位工程师的答案缺乏深度。他似乎没有做足够严谨的思考：静静坐着，通过研究筛选，仔细思考如何选择，思考你业已知道的、尚不了解的、以及需要更多工作的地方。我年轻时就采用这种思考方式。自从那时起，我采取了一种严谨的方法，花好几个小时思考，甚至花费更多的时间把最困难的部分写下来。</p>
-<p>今天，长篇写作正在被取代。人们使用推特对话。 PowerPoint将想法凝结成一个个billet point。词汇已被表情符号和GIF动图所替代。我们已经沉迷于噪音。网络世界中的1分钟，会发生哪些事？ 1600万条短信。180万个快照。452000条推文。1.56亿封电子邮件。谁有时间思考和写作呢？</p>
-<p>也许，身处科技行业的我们自己，塑造了这个现实。我们发明了电话，APP和通过网络时刻连接的世界。我们让社会放下了笔。今天，我唯一写的东西就是电子邮件和发布微信朋友圈。</p>
-<p>所以我很担心，我们正在失去一个有价值的工具。这个工具可以帮助我们深度思考，最大限度表达自我，并扩展智慧。而对于技术界来说，这个问题尤其令人不安。对AI的赌注比以往任何时候都要高。我们承受着巨大压力来做到更快更多，但我们不能以牺牲最高的工程质量为代价。我们必须仔细考虑后果和选择。当一辆无人驾驶车辆撞上行人时，应该责怪谁？编写代码的工程师就是司机。谁该对有偏见的AI算法负责？创建该AI的工程师本人。</p>
-<p>还在坚持写作和分享深刻见解的工程师越来越少了，但只有写作和深度思考才能引导整个行业做出真正的创新。相比起渐进的里程碑，我们如何才能实现巨大的变革突破？</p>
-<p>答案就是：通过写作。因为思考的方式实际上就是写作。</p>
-<p>用笔在纸张上写作，迫使你通过迭代、修改和探索其他可能性，来发展和改进你的想法。能够深度思考的人都可以写出优美的代码，激励人心的论文，或者制定下一个重大事件的计划。我鼓励你阅读Reid Hoffman的 Series B pitch for LinkedIn，他分享了帮助他成功的思想。他分享说，风险投资公司的合伙人面对着5000个投资可能性，仔细考察的数量在600到800个之间，最终做的交易数量为0到2个。</p>
-<p>写作让人有机会创造可以一直存在的事物（artifact）。例如我发表的流传下来的论文，尽管它们也许只是作为参考文献存在。Plenoptic Sampling、Lazy Snapping，Poisson Matting，这些都是我对计算机视觉和图形领域的贡献。它们在我死以后仍然存在，如果有幸，还能影响一两个人的想法。</p>
-<p>卡内基梅隆大学我最喜欢的一位教授Takeo Kanade曾说，你必须像写侦探小说那样写研究论文。你需要故事、悬念、惊喜，以及“Aha”的顿悟一刻，向同伴解释你的想法，激励他人也往这个方向努力，并将你的工作和整个领域推动往前。</p>
-<p>写作是一个均衡器，能将整个团队的最好一面展现出来。在亚马逊，presentation是用六页纸的报告（paper）。会议开始后，每个人先读文章，然后向作者提出意见和问题。每个人都在同一个环境下工作，内向的人、外向的人、其他国家非英语母语的人，都有同样的机会交流自己的想法。这不关乎presenter的性格，而是在于话语（words）。</p>
-<p>最后，写作还有助于你成功。你或许是最聪明的人，拥有最好的想法，但如果你不能以令人信服的方式将你的想法与他人沟通，你就不会走得太远。我们的AI+R团队中有两位工程师，Bill Ramsey和Ronny Kohavi，他们长期坚持写作，我常常从他们那里得到启发。Bill在微软撰写了250多篇博文，使我们整个技术社区都受益匪浅。而Ronny更是，你甚至不需要当面见他——他关于A/B测试实验的高引用论文已经说明了一切，而且他在LinkedIn上发布的文章对整个行业都有益处。</p>
-<p>当你阅读这些内容时，你可能会冒出很多不同的观点：我需要推动结果，所以我需要直接去编码。大家都知道我代码好，所以我不需要写论文。我不是英语母语，我用代码说得更好。我不知道该写些什么。我没有时间……但请把这些想法放在一边——为了你自己的成功，为了你的公司，为了行业的进步——开始写作吧。</p>
-<p>我已经多次见证，将长篇写作（long-form writing）纳入工程文化——规划文件，项目建议书，技术评估报告（LRP），评论文章——激励我们共同努力，共同创造和培养大的创想和全局思维。</p>
-<p>最近我往这个方向踏出了第一步，与同事何晓东和李迪一起写了一篇研究论文，《从Eliza到小冰：社交聊天机器人的挑战与机遇》（From Eliza to XiaoIce: Challenges and Opportunities with Social Chatbots），这是我多年来的第一次尝试，所以请不要批判，只提供建设性的反馈！</p>
-<p>我向每一个阅读这篇文章的人发起挑战：每周写500字。如果你有一个想法，或者你发现一个问题，写下你的建议，并且分享它！</p>
-<p>让我们写下更多文字，重写精神领袖和工程质量的标准！</p>
-
+<p>推特、PPT、Facebook、Instagram和短信是否会削弱人类思考能力？<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/Daily/2021-08-09/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -322,10 +252,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-08-07 23:27:22 / Modified: 23:57:30" itemprop="dateCreated datePublished" datetime="2021-08-07T23:27:22+08:00">2021-08-07</time>
+              <time title="Created: 2021-08-07 23:27:22" itemprop="dateCreated datePublished" datetime="2021-08-07T23:27:22+08:00">2021-08-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-13 09:53:14" itemprop="dateModified" datetime="2021-09-13T09:53:14+08:00">2021-09-13</time>
+              </span>
 
           
 
@@ -338,21 +274,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>什么是 karmic payback？周五看电梯调度的一篇文章发现了这个词，Google 查了一下好像还没有准确的翻译。payback 就是回报，karmic 是 karma 的形容词，karma 是宗教概念，直译作“业力”，在印度很多宗教都有这个观念，但不同宗教内部的定义还有所区别。据维基百科的解释：</p>
-<blockquote>
-<p>业力是指个人过去、现在的行为所引发的结果的集合，业力的结果会主导现在及将来的经历</p>
-</blockquote>
-<blockquote>
-<p>印度教认为，业力是自然、非个人、形而上的法则，不是惩罚或奖赏，人神都没有改变这个法则的能力。业力观是构成印度教理想主义中的主要部分。</p>
-</blockquote>
-<blockquote>
-<p>佛教认为，业既是行造做的果，又是再次遇到缘境时产生行的因。</p>
-</blockquote>
-<p>看到这个定义我想起来乔布斯在演讲中说过“点连成线”之类的话，把原文找出来发现也提到了 karma 这个词，感觉还是挺奇妙的。</p>
-<blockquote>
-<p>You can’t connect the dots looking forward; you can only connect them looking backwards. So you have to trust that the dots will somehow connect in your future. You have to trust in something - your gut, destiny, life, karma, whatever. This approach has never let me down, and it has made all the difference in my life.</p>
-</blockquote>
-
+          <p>什么是 karmic payback？周五看电梯调度的一篇文章发现了这个词，Google 查了一下好像还没有准确的翻译。payback 就是回报，karmic 是 karma 的形容词，karma 是宗教概念，直译作“业力”，在印度很多宗教都有这个观念，但不同宗教内部的定义还有所区别。据维基百科的解释：<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/Daily/2021-08-07/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -402,7 +332,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-05 14:19:58" itemprop="dateModified" datetime="2021-08-05T14:19:58+08:00">2021-08-05</time>
+                <time title="Modified: 2021-09-13 09:53:23" itemprop="dateModified" datetime="2021-09-13T09:53:23+08:00">2021-09-13</time>
               </span>
 
           
@@ -416,15 +346,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>我们在之前讨论过 NP-hard 和 NP-complete 的关系，而旅行商问题(travel salesman problem, TSP)是最经典的 NP-hard 问题之一。 原题可以表述为：给定若干城市及每组城市间距离，求解访问每座城市恰好一次并回到起始城市的最短回路。</p>
-<p>TSP 问题的表述在图论中等价于：给定一个完全加权图，求解权重之和最小的哈密顿回路。</p>
-<p>这个题有非常多的变种，这里随便列举一些</p>
-<ul>
-<li>判定版本（decision version)：在原条件下再给定一个长度，问是否存在比该长度更短的回路。</li>
-<li>瓶颈版本(bottleneck TSP): 给定一个加权图，找到哈密顿回路使得其中的最大权重边最小。据说这个版本在物流、交通这样的现实问题中非常重要。在电路板的印制中，钻头的钻孔和移动就相当于城市之间的距离成本。</li>
-<li>广义旅行商问题(generalized TSP, set TSP): 图中的节点被分为若干个不相交的子集，求解最小回路使得恰好能访问每个子集中的一个节点。显然，经典的 TSP 就是每个子集都是节点本身的一个特例。既然 TSP 是 NP-hard 的，那么 set TSP 也是 NP-hard 的。这个版本还有一个名称叫 旅行政客问题，也就是要求政客恰好能访问每个“州”中的一个“城市”。这个问题在运筹学(operations research)上还有一种应用是原料裁切问题(cutting stock problem)，比如在加工卷纸和金属板时，如何切割原料能够尽可能小的减少浪费或者减少刀片的更换次数。</li>
-</ul>
-
+          <p>我们在之前讨论过 NP-hard 和 NP-complete 的关系，而旅行商问题(travel salesman problem, TSP)是最经典的 NP-hard 问题之一。 原题可以表述为：给定若干城市及每组城市间距离，求解访问每座城市恰好一次并回到起始城市的最短回路。<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/08/Daily/2021-08-04/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -474,7 +404,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-05 14:20:06" itemprop="dateModified" datetime="2021-08-05T14:20:06+08:00">2021-08-05</time>
+                <time title="Modified: 2021-09-13 09:53:36" itemprop="dateModified" datetime="2021-09-13T09:53:36+08:00">2021-09-13</time>
               </span>
 
           
@@ -488,15 +418,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>目前在整理一篇 JProfiler best practice 的文章，为了不浪费每天有且仅有一次的推送机会，分享两首有点哲理的小诗，作者是白居易。</p>
-<blockquote>
-<p>放言五首·其二 <br> <br><br>世途倚伏都无定，尘网牵缠卒未休 <br><br>祸福回还车转毂，荣枯反覆手藏钩 <br><br>龟灵未免刳肠患，马失应无折足忧 <br><br>不信请看弈棋者，输赢须待局终头 <br></p>
-</blockquote>
-<blockquote>
-<p>放言五首·其三 <br> <br><br>赠君一法决狐疑，不用钻龟与祝蓍<br>试玉要烧三日满，辨材须待七年期 <br><br>周公恐惧流言日，王莽谦恭未篡时 <br><br>向使当初身便死，一生真伪复谁知 <br></p>
-</blockquote>
-<p>背景就是白居易被降职了内心非常不爽，坐船时发表了一些感慨。意思就不解释了，诗句的特点就是读起来觉得略有哲理，解释一番又觉得很肤浅了。</p>
-
+          <p>目前在整理一篇 JProfiler best practice 的文章，为了不浪费每天有且仅有一次的推送机会，分享两首有点哲理的小诗，作者是白居易。<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/Daily/2021-07-28/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -546,7 +476,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-05 14:39:00" itemprop="dateModified" datetime="2021-08-05T14:39:00+08:00">2021-08-05</time>
+                <time title="Modified: 2021-09-13 09:53:32" itemprop="dateModified" datetime="2021-09-13T09:53:32+08:00">2021-09-13</time>
               </span>
 
           
@@ -560,11 +490,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>其实还是想写一些既能提升 writing skill 也能提升 professionalism 的东西, 也许现在的问题是不知道自己的职业需要什么样的能力了。</p>
-<p>最近几周的工作在研究 Java performance profiling, 主要是使用 JProfiler, Async-Profiler 这样的工具来定位性能瓶颈在哪里，各种原因导致目前还没有很大的进展。</p>
-<p>工作之外了解或者熟悉了旅行商问题(traveling salesman problem, TSP), 计算几何中的凸包(convex hull) 和 字符串处理中的后缀自动机(suffix automaton)，每一个都浅尝辄止而每一个又值得花专门时间写成一系列文章。</p>
-<p>后续还是要功利一点，工作需要什么，我们就学习什么，逐渐的工作就会变成兴趣了。</p>
-
+          <p>其实还是想写一些既能提升 writing skill 也能提升 professionalism 的东西, 也许现在的问题是不知道自己的职业需要什么样的能力了。<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/Daily/2021-07-26/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -614,7 +548,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-05 14:39:19" itemprop="dateModified" datetime="2021-08-05T14:39:19+08:00">2021-08-05</time>
+                <time title="Modified: 2021-09-13 09:52:59" itemprop="dateModified" datetime="2021-09-13T09:52:59+08:00">2021-09-13</time>
               </span>
 
           
@@ -628,1032 +562,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>很惭愧，没有学什么新东西。只是简单介绍一种职业成长中的学习方式，我个人也在践行中，这就是软件架构基础(Fundamentals of Software Architecture)这本书的最后一张提到的 The 20-Minute Rule。</p>
-<p>我只是翻了下这本书的目录，挑了几页快速瞄了一眼。作者觉得作为架构师，技术广度比技术深度更重要，但是维护广度需要大量的时间和精力。并不是所有人都有时间每天访问各种网站，阅读各种文章、论文或期刊。这里介绍了一种技巧就是每天花费至少 20 分钟来学习新知识或者深究一些某个题目，至于通过什么网站获得新的知识这就自己决定了。另外还强烈建议把这一段时间放在工作开始之前，这样才不会因为常常因为临时的事情而取消了。</p>
-<p>他还举了 Thoughtworks 长期使用 DOS 上的软件而没有注意到 Windows 的流行这个例子来说明发现新技术的重要，或者叫 Technology Radar. 你只有知道这个事物存在你才能够去学习它。前几天也在 Twitter 看到一句话：“信息造就思维，思维影响判断，判断决定行为，行为就是你的命运”</p>
-<blockquote>
-<p>How do we get great designers? Great dsigners design, of course.</p>
-</blockquote>
-<blockquote>
-<p>So how are we supposed to get great architects, if they only get the chance to architect fewer than a half-dozen times in their career?</p>
-</blockquote>
-<blockquote>
-<p>Practice is the proven way to build skills and become better at anything in life… including architecture.</p>
-</blockquote>
-<p>所以未来介绍一些优秀的架构和系统设计也也是一个不错的计划。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/07/Daily/2021-07-24/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/07/Daily/2021-07-24/" class="post-title-link" itemprop="url">2021/07/24</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-07-24 08:24:01" itemprop="dateCreated datePublished" datetime="2021-07-24T08:24:01+08:00">2021-07-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-05 14:39:13" itemprop="dateModified" datetime="2021-08-05T14:39:13+08:00">2021-08-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>什么是 P, NP, NP-Complete 和 NP-Hard。</p>
-<p>首先，P 指的是一个判定问题(decision problem)能被确定性图灵机(deterministic Turing machine)在多项式时间(polynomial time)内解决。判定问题就是说问题的答案是 yes 或 no，问题的分类上还会有功能性问题(function problem), 最优化问题(optimization problem)；确定性图灵机或者图灵机是计算机的逻辑基础，就是一台计算机在数学逻辑上怎么进行计算；多项式时间表示对于问题大小为 n 的输入的复杂度为 <em>O(n^k)</em> 并且 k 为常数。</p>
-<p>NP(nondeterministic polynomial time)是指一组 P 问题的集合，或者是能够被不确定性图灵机在多项式时间呢解决的问题。<br>NP-Complete 问题是指存在一个多项式时间算法能验证当前的答案是否正确，但没有对应的多项式时间算法可以求解出答案。</p>
-<p>听起来 NP-Complete 已经是不可解的问题了，那 NP-Hard 又是什么呢。在字面上的定义是难度至少不小于 NP-Complete。在 Quora 上看到了几个例子来说明这一点，时间问题来不及翻译了，直接 copy-paste 一下吧。</p>
-<hr>
-<p>Assume that I have a problem (H) which I <em>believe</em> is NP-complete (solution is verifiable in PTIME). Let there be an intermediate step (subroutine S) which must be solved in order to solve for H. If S is said to be NP-complete, then H is at least as hard as S. In fact H is <em>harder</em> than S. Thus H is <em>harder</em> than a NP-complete problem. So it needs to be in a complexity class of its own and hence H belongs to a class known as the NP-hard class. However note that H is not <em>strictly</em> NP-hard. This leads us to conclude that NP-complete is a class of problems that fall under both NP and NP-hard - hardest of the NP problems is NP-complete and the hardest of NP-complete is NP-hard.</p>
-<p>Example 1: Let us consider the classical version of TSP (Travelling Sales Person) problem - find the shortest distance between two cities on a map such that the sales person visits each city only once. This is a constrained optimization problem. To solve this one needs to solve for Hamiltonian Cycles first. In 1972, Prof. Richard Karp proved that Hamiltonian cycles are NP-complete. Now, the classical TSP is at least as hard as a NP-complete problem. Prof. Karp thus proved the NP-hardness of the classical TSP. So classical TSP is a NP-hard problem. Note that it is not <em>strictly</em> NP-hard.<br>(There is a decision version of this problem - given distance L between two cities, can you give a better l &lt; L ? This requires a yes/no answer. This decision version of classical TSP is NP-complete and not NP-hard.)</p>
-<p>Example 2: The halting problem is NP-hard. Given an input, will the Turing machine halt? A Turing machine can be given a constraint to halt - when it solves the SAT problem it can halt. The solution to SAT can be verified in PTIME and hence once the machine outputs the correct solution it halts. However, SAT is a NP-complete problem. So the <em>general</em> halting problem should be at least as hard as the SAT problem. Hence it is a NP-hard problem.</p>
-<p>补充一下翻译：<br>假定问题 H 属于 NP-Complete，且求解 H 过程中有一个必经的子程序 S。若 S 是 NP-Complete 的，则 H 至少难度与 S 一致。而实际上 H 难度大于 S，即 H 是一个难度大于 NP-Complete 的问题，因此 H 需要有一个单独的复杂度分类即 NP-Hard。但 H 并不是严格的 NP-hard。根据上述可得到一个结论：NP-Complete 同时属于 NP 和 NP-Hard(难度最高的 NP 问题是 NP-Complete，难度最高的 NP-Complete 是 NP-Hard)</p>
-<p>例一：考虑一下经典的旅行商问题 - 寻找城市间的最短路径使得通过每个城市恰好一次。这是一个约束优化问题，首先我们需要解决哈密顿环问题。Richard Karp 在 1972 年证明了哈密顿环是 NP-Complete 的。也就是旅行商问题至少是 NP-Complete 问题。实际上 Karp 教授也证明了其同样是 NP-hard 问题。</p>
-<p>例二：停机问题(halting problem)是 NP-hard 的。给定一个输入，图灵机会在有限时间内终止吗。图灵机是否能被指定的约束而终止 - 解决布尔可满足性问题(SAT)时，由于 SAT 的答案可以在 PTIME 内验证，所以当机器输出了正确答案时可以终止。但 SAT 是一个 NP-Complete 完全问题，所以停机问题的难度应至少不低于 SAT 问题，即停机问题是 NP-Hard 的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/05/Daily/2021-07-23/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/Daily/2021-07-23/" class="post-title-link" itemprop="url">2021/07/23</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-05-15 22:28:28" itemprop="dateCreated datePublished" datetime="2021-05-15T22:28:28+08:00">2021-05-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-05 14:39:07" itemprop="dateModified" datetime="2021-08-05T14:39:07+08:00">2021-08-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>继续读罗素的《幸福之路》，他另外谈到了不快乐的两个原因：竞争和厌烦。</p>
-<p>他对竞争造成不快乐的原因归结于某些人把竞争本身当成人生的目标，过分的重视了竞争带来的成功，以至于把它当成主要的快乐来源。因此只会在竞争成功的那一刻能够感受到短暂的快乐，甚至是假象带来的快乐。</p>
-<blockquote>
-<p>现代生活中如此重视竞争，实在与文化水平的普遍低下有关，就像奥古斯统治下的拉丁文学全盛时期之后的罗马帝国中的情形一样。男人和女人似乎都不能感受到那种更需要智力的乐趣</p>
-</blockquote>
-<p>只注重竞争本身确实会带来很多问题，最近很流行的“内卷”实际上也是不能产生实质进步的恶性竞争。也许罗素关注的是纯粹的快乐，是需要受过一定教育后才能体验到的享受。在赚钱或者读书的竞争中，如果只注重结果造成的快感，在过程中就有可能产生虚伪或欺骗，也忽略了工作和阅读之中真正能给你带来快乐的部分，为了得到某种快乐而放弃了其他部分，他认为代价过大了。</p>
-<blockquote>
-<p>医治的办法是，遵循保持生活平衡的观念，不拒绝健全而恬静的感受</p>
-</blockquote>
-<p>换成中国的说法就是安贫乐道。罗素虽然鼓励这么做，但就他的出身来说，应该没有这方面的忧虑了。</p>
-<p>对于厌烦的看法比较赞成。厌烦的不快乐在于惧怕烦闷，没有娱乐活动，没有文化生活，不知道如何消磨时间，在农业时代的这种感觉可能更明显。我们常常寻找欢乐，寻找刺激，2021 年的方式和 1920 年的有所区别，但解决的问题都是一样的。所以我们为了使自己快乐起来，不得不培养一下忍受厌烦的能力。这些道理是浅显的，也是极难做到的。</p>
-<blockquote>
-<p>所有伟大的著作都有枯燥的部分，所有伟大的人生都有乏味的努力</p>
-</blockquote>
-<blockquote>
-<p>一切伟大的成就都离不开持之以恒的劳动，其专注与艰苦的程度，使人没有余力去从事疯狂的娱乐</p>
-</blockquote>
-<blockquote>
-<p>不能忍受烦闷的一代必将是无所作为的一代，他们过分脱离缓慢的自然过程，各种有生机的活动就像瓶中的插花一样逐渐枯萎</p>
-</blockquote>
-<blockquote>
-<p>快乐的生活必将在很大程度上属于静谧的生活，因为唯有在静谧的气氛中，真正的快乐才能存在</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/03/Reading/%E8%A5%BF%E8%A1%8C%E6%BC%AB%E8%AE%B0%E6%9C%AD%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/Reading/%E8%A5%BF%E8%A1%8C%E6%BC%AB%E8%AE%B0%E6%9C%AD%E8%AE%B0/" class="post-title-link" itemprop="url">西行漫记札记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-03-07 22:51:55" itemprop="dateCreated datePublished" datetime="2021-03-07T22:51:55+08:00">2021-03-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-07-15 14:23:47" itemprop="dateModified" datetime="2021-07-15T14:23:47+08:00">2021-07-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>带着共产党和红军的各种疑问，冒着生命危险，在北平登上了去西安的火车。<br>见到了杨虎城，邵力子，董健吾，邓发<br>趁着股价暴跌，过来谈一个好 offer，过两年又可以人生巅峰了</p>
-<p>我们部门（快手Server平台中心）招人了，北京深圳都有职位，资深/不资深的 engineer/manager 都需要。title 是 Java工程师/架构师，也不一定得会 Java，学得快过来转个技术栈也就是几周的事情。</p>
-<p>公司年前已经上市了，许多同事也都是亿万身家。但是否上市和收益也并不是强相关，Amazon自 1997 年上市以来1000<br>短视频/直播电商 的赛道仍在白热化阶段，</p>
-<p>下面这两个职位的官方 JD，可以随意看看，有兴趣的可以扫码投递或者发简历到 <a href="mailto:zhangji05@kuaishou.com">zhangji05@kuaishou.com</a></p>
-<h2 id="高级Java开发工程师（Server）"><a href="#高级Java开发工程师（Server）" class="headerlink" title="高级Java开发工程师（Server）"></a>高级Java开发工程师（Server）</h2><ul>
-<li>职位描述</li>
-</ul>
-<ol>
-<li>参与快手核心产品需求的开发，深入发掘和分析业务需求，撰写技术方案和系统设计，以及相关的代码开发；</li>
-<li>接受高并发、海量数据的挑战，分析和发现系统的优化点，负责推动系统的性能和可用性的提升； </li>
-<li>接受中台/平台系统设计与实现复杂度的挑战，分析和发现系统的优化点，负责推动系统的合理性、可靠性、可用性的提升；  </li>
-<li>为团队引入创新的技术、创新的解决方案，用创新的思路解决问题。</li>
-</ol>
-<ul>
-<li>任职要求</li>
-</ul>
-<ol>
-<li>三年以上Java开发经验，有扎实的计算机基础知识和编程功底；</li>
-<li>精通多线程编程，熟悉JVM，熟悉常见的开源分布式中间件、缓存、消息队列等，熟悉MySQL，熟悉Linux下的DevOps；</li>
-<li>熟悉面向对象设计，有一定的系统架构设计能力；</li>
-<li>热爱技术，对代码质量和开发规范有近乎苛刻的要求，善于沟通与团队协作；</li>
-<li>有大型分布式、高并发、高负载、高可用性系统设计和稳定性经验优先。</li>
-</ol>
-<h2 id="Java技术专家-架构师（Server）"><a href="#Java技术专家-架构师（Server）" class="headerlink" title="Java技术专家/架构师（Server）"></a>Java技术专家/架构师（Server）</h2><ul>
-<li>职位描述</li>
-</ul>
-<ol>
-<li>负责快手主APP核心业务的后端架构设计，并能够完成核心代码的编写，确保技术方案能够高质量完成。</li>
-<li>接受高并发、海量数据的挑战，分析和发现系统的优化点，负责推动系统的架构改造和可用性的提升，保障业务快速迭代和增长；</li>
-<li>对现有业务系统的架构进行抽象和升级，形成新的通用平台、业务中台，并推动业务中后台的发展，提升整体的研发效率；</li>
-<li>具有一定的技术前瞻性，对技术有热情，善于研究分析业内主流产品技术实现，不断优化当前系统架构设计。</li>
-</ol>
-<ul>
-<li>任职要求</li>
-</ul>
-<ol>
-<li>五年及以上Java后端系统开发经验，有扎实的计算机基础知识和编程功底；</li>
-<li>精通多线程编程，熟悉JVM，熟悉常见的开源分布式中间件、缓存、消息队列等，熟悉MySQL，熟悉Linux下的DevOps，拥有复杂系统架构设计能力；</li>
-<li>具有较强的分析问题和快速解决问题的能力，良好的技术文档撰写能力和工作习惯，善于学习新技术；</li>
-<li>具备良好的沟通技能和团队协作意识，有能力针对特定场景或要求给出合理的技术解决方案，并跨部门协调完成；</li>
-<li>热爱技术，有追求极致的精神，对代码质量和开发规范有近乎苛刻的要求；</li>
-<li>有大型分布式、高并发、高负载、高可用性系统设计和稳定性经验优先。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/01/Reading/%E7%AC%94%E8%AE%B0-%E7%A6%85%E4%B8%8E%E6%91%A9%E6%89%98%E8%BD%A6%E7%BB%B4%E4%BF%AE%E8%89%BA%E6%9C%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/Reading/%E7%AC%94%E8%AE%B0-%E7%A6%85%E4%B8%8E%E6%91%A9%E6%89%98%E8%BD%A6%E7%BB%B4%E4%BF%AE%E8%89%BA%E6%9C%AF/" class="post-title-link" itemprop="url">禅与摩托车维修艺术 笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-20 01:17:16 / Modified: 01:43:39" itemprop="dateCreated datePublished" datetime="2021-01-20T01:17:16+08:00">2021-01-20</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>用了四五个周日的下午看完了，故事背景是作者带着儿子和另两位好友，骑着两辆摩托由东向西穿越美国，</p>
-<p>形式上有点像<a target="_blank" rel="noopener" href="https://book.douban.com/subject/2284311/">《苏菲的世界》</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/01/Road-to-Grandmaster/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/Road-to-Grandmaster/" class="post-title-link" itemprop="url">Road to Grandmaster</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-17 11:33:09" itemprop="dateCreated datePublished" datetime="2021-01-17T11:33:09+08:00">2021-01-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-07 11:11:58" itemprop="dateModified" datetime="2021-03-07T11:11:58+08:00">2021-03-07</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>我们的目的一定要达到，我们的目的一定能够达到！</p>
-<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><h3 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h3><h3 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h3><h3 id="计算几何"><a href="#计算几何" class="headerlink" title="计算几何"></a>计算几何</h3><h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><a target="_blank" rel="noopener" href="https://lukipuki.github.io/contest-wiki/get-better.html">https://lukipuki.github.io/contest-wiki/get-better.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/01/Reading/%E7%AC%94%E8%AE%B0%20-%20Google-%E4%B8%89%E9%83%A8%E6%9B%B2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/Reading/%E7%AC%94%E8%AE%B0%20-%20Google-%E4%B8%89%E9%83%A8%E6%9B%B2/" class="post-title-link" itemprop="url">Google 三部曲 笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 17:50:33" itemprop="dateCreated datePublished" datetime="2021-01-02T17:50:33+08:00">2021-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 00:45:47" itemprop="dateModified" datetime="2021-01-20T00:45:47+08:00">2021-01-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="重新定义公司"><a href="#重新定义公司" class="headerlink" title="重新定义公司"></a>重新定义公司</h2><ul>
-<li>最好的产品是通过新的方法运用一两项科技来解决重大问题的独特洞见</li>
-<li>将 80% 的时间花在带来 80% 收益的项目上</li>
-</ul>
+          <p>很惭愧，没有学什么新东西。只是简单介绍一种职业成长中的学习方式，我个人也在践行中，这就是软件架构基础(Fundamentals of Software Architecture)这本书的最后一张提到的 The 20-Minute Rule。<br>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/01/Reading/%E7%AC%94%E8%AE%B0%20-%20Google-%E4%B8%89%E9%83%A8%E6%9B%B2/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2021/01/Reading/%E7%AC%94%E8%AE%B0%20-%20%E4%BC%A0%E4%B9%A0%E5%BD%95%E6%B3%A8%E7%96%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/Reading/%E7%AC%94%E8%AE%B0%20-%20%E4%BC%A0%E4%B9%A0%E5%BD%95%E6%B3%A8%E7%96%8F/" class="post-title-link" itemprop="url">传习录注疏 笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 11:35:39" itemprop="dateCreated datePublished" datetime="2021-01-02T11:35:39+08:00">2021-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 00:47:27" itemprop="dateModified" datetime="2021-01-20T00:47:27+08:00">2021-01-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>“道心”常為一身之主,而”人心”每聽命.</p>
-<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
-<li>王氏六经: <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/续六经">https://zh.wikipedia.org/wiki/续六经</a></li>
-<li>十翼: <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/十翼">https://zh.wikipedia.org/wiki/十翼</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2018/11/Refactoring/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/Refactoring/" class="post-title-link" itemprop="url">Refactoring</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-11-25 23:29:07" itemprop="dateCreated datePublished" datetime="2018-11-25T23:29:07+08:00">2018-11-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-15 22:24:52" itemprop="dateModified" datetime="2021-05-15T22:24:52+08:00">2021-05-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Tips<br>Refactoring changes the programs in small steps. If you make a mistake, it is easy to find the bug.</p>
-<p>Any fool can write code that a computer can understand. Good programmers write code that humans can understand.</p>
-<p>Refactoring is a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behavior.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2018/11/Effective-Java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/Effective-Java/" class="post-title-link" itemprop="url">Effective Java</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-11-02 00:42:42" itemprop="dateCreated datePublished" datetime="2018-11-02T00:42:42+08:00">2018-11-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 03:10:20" itemprop="dateModified" datetime="2020-05-13T03:10:20+08:00">2020-05-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Creating-and-Destroying-Objects"><a href="#Creating-and-Destroying-Objects" class="headerlink" title="Creating and Destroying Objects"></a>Creating and Destroying Objects</h2><ol>
-<li>Consider static factory methods instead of constructors</li>
-<li>Consider a builder when faced with many constructor parameters</li>
-<li>Enforce the singleton property with a private constructor or an enum type</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/Effective-Java/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2018/10/%E4%BB%8E%E7%94%B5%E6%A2%AF%E8%B0%83%E5%BA%A6%E9%97%AE%E9%A2%98%E8%B0%88%E8%B5%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/10/%E4%BB%8E%E7%94%B5%E6%A2%AF%E8%B0%83%E5%BA%A6%E9%97%AE%E9%A2%98%E8%B0%88%E8%B5%B7/" class="post-title-link" itemprop="url">从电梯调度问题谈起</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-10-23 21:30:23" itemprop="dateCreated datePublished" datetime="2018-10-23T21:30:23+08:00">2018-10-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-08-08 22:06:14" itemprop="dateModified" datetime="2021-08-08T22:06:14+08:00">2021-08-08</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
-<li>对电梯调度发生兴趣的起源</li>
-</ul>
-<h2 id="电梯调度为什么复杂"><a href="#电梯调度为什么复杂" class="headerlink" title="电梯调度为什么复杂"></a>电梯调度为什么复杂</h2><p>先问是不是，再问为什么。操作系统原理的本科课程一般都会提到 I/O 调度问题，多个 I/O 请求可能同时到达但磁盘控制器同一时间只能执行一次 I/O 操作；不同 I/O 操作在磁盘上的远距离会导致磁盘臂的较大移动；<br>磁盘访问时间(Disk Access Time) = 寻址时间(Seek Time) + 旋转延迟(Rotational Latency) + 数据传输时间(Transfer Time)<br>I/O 调度就是为了降低磁盘访问的整体时间，其中的扫描算法(SCAN)也被叫做电梯算法(elevator algorithm)。磁盘臂往一个方向的旋转相当于电梯的上升或下降，</p>
-<p>听起来还是比较简单的对吗，下面我们分别用 Java 和 Python 实现一下。</p>
-<ul>
-<li>最小化磁盘寻址时间</li>
-<li>优先处理特定 I/O 请求</li>
-</ul>
-
-<!-- Has Prism -->
-<pre class="{{ pre_class }}" style="{{ pre_style }}" {{ data_attr }}><code class="language-&#123;&#123; lang &#125;&#125;">
-&#123;&#123;- code -&#125;&#125;
-</code></pre>
-
-<!-- Has Prism -->
-<pre class="{{ pre_class }}" style="{{ pre_style }}" {{ data_attr }}><code class="language-&#123;&#123; lang &#125;&#125;">
-&#123;&#123;- code -&#125;&#125;
-</code></pre>
-<p>电梯组数多起来后性质发生了什么变化呢</p>
-<p>看起来对 SCAN 的理解和实现都比较简单，那么电梯调度的复杂究竟在哪里呢。</p>
-<p>群控电梯。</p>
-<p>在 2001 年《控制与决策》上的一篇文章就提到</p>
-<blockquote>
-<p>国内使用的先进的电梯群控系统基本上都是国外电梯公司制造的…国内自主版权的控制方法和技术在实际中的应用还未见报道。…国外已有的先进控制技术, 很多都掌握在各个大电梯公司手中, 其核心技术是不公开的…</p>
-</blockquote>
-<p>确定研究对象，得出结论</p>
-<p>平均等待时间<br>专家系统，模糊逻辑</p>
-<p>这里介绍一下什么是 NP-Hard 问题，已经了解了的可以跳转下一节。<br>凡是有计算机基础的都应该听说过 P/NP 问题，但是要从。<br>得到问题的解和验证一个解是否正确，这个快速就是说的多项式时间，是</p>
-<p>图灵机，。不确定性图灵机</p>
-<ul>
-<li>影响电梯调度复杂度的参数，数学公式</li>
-<li>介绍 NP-hard</li>
-</ul>
-<p>实际上，在一个 k 层楼，n 台电梯的系统中，一共有 n^k 中状态。</p>
-<h2 id="与线程调度的关系"><a href="#与线程调度的关系" class="headerlink" title="与线程调度的关系"></a>与线程调度的关系</h2><p>或许是快手总部的楼层数和电梯数都不够多，电梯调度的复杂程度好像离我们比较远</p>
-<ul>
-<li>为什么没有进程调度</li>
-<li>线程调度的两个类型</li>
-<li>CPU </li>
-</ul>
-<h2 id="其他经典调度问题"><a href="#其他经典调度问题" class="headerlink" title="其他经典调度问题"></a>其他经典调度问题</h2><p>Google 查询 “scheduling problem” 时，排名靠前的是其他，我们也做一些简单的介绍。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上是我对电梯调度及相关问题的简单介绍，</p>
-<h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>有过算法学习经历的同学一般都了解旅行商问题(Traveling salesman problem)。<br>“给定义一组城市和每对城市间距离，求访问每个城市恰好一次并能回到起始城市的最短路径”</p>
-<ul>
-<li>NP-hard，旅行商问题</li>
-</ul>
-<p>部分网页不能正常显示的需要下载文件查看。</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://kuaipan.corp.kuaishou.com/index.php/s/7a4JXUhO3ALObNc">强化学习, Reinforcement Learning</a></li>
-<li><a target="_blank" rel="noopener" href="https://kuaipan.corp.kuaishou.com/index.php/s/M5DiYpe5FYqsO1H">模糊逻辑, Fuzzy Logic</a></li>
-<li><a target="_blank" rel="noopener" href="https://kuaipan.corp.kuaishou.com/index.php/s/7rtdCPBLwPkLTg0">电梯群控智能控制技术</a></li>
-<li><a href="">The Hidden Sicience of Elevators</a></li>
-</ul>
-<h2 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h2><p>我对电梯调度发生兴趣是前公司在 2018 年对办公楼做过一次电梯系统改造，改造后的交互是：用户选择到达楼层，系统告知几号电梯被呼叫到。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2018/08/Reading/%E7%AC%94%E8%AE%B0%20-%20%E6%80%8E%E6%A0%B7%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/Reading/%E7%AC%94%E8%AE%B0%20-%20%E6%80%8E%E6%A0%B7%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/" class="post-title-link" itemprop="url">怎样阅读一本书</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-08-19 01:28:31" itemprop="dateCreated datePublished" datetime="2018-08-19T01:28:31+08:00">2018-08-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-20 00:46:46" itemprop="dateModified" datetime="2021-01-20T00:46:46+08:00">2021-01-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一直以来觉得自己读书不够。以前读的书也比较浅，有很多本来有兴趣的大部头因为没能坚持，翻了前面几章就放在书柜上起灰了。没有系统的整理，不知道哪些书该读，哪些书不该读，怎样才能够快速抓到书中对自己有用的部分而不受书害，希望随着阅读量的累计对这些问题有更深刻的看法。</p>
-<p>读工作相关的技术类书籍严格讲不算阅读，和读其他的书差别也比较大。</p>
-<p>读英文原著一直是可望而不可即的目标，30年内应该是比较难实现了。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2018/08/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">分布式系统一致性协议</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-08-12 20:11:10" itemprop="dateCreated datePublished" datetime="2018-08-12T20:11:10+08:00">2018-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-13 03:10:20" itemprop="dateModified" datetime="2020-05-13T03:10:20+08:00">2020-05-13</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Two-Phase-Commit"><a href="#Two-Phase-Commit" class="headerlink" title="Two-Phase Commit"></a>Two-Phase Commit</h2><p>二阶段提交，分布式系统架构下保证所有节点在事务处理中保持原子性和一致性而设计的一种算法。一个事务跨越多个节点时，为了保证事物的ACID特性，需要引入一个作为Coordinator来控制所有Cohorts的处理结果，总体的思路就是：Cohorts将操作结果通知Coordinator，Coordinator根据所有Cohorts的结果判断是否提交或者中止操作。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/08/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E4%B8%80%E8%87%B4%E6%80%A7%E5%8D%8F%E8%AE%AE/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://macans.github.io/macans.github.io/2018/05/%E8%AF%91-Reviewing-LevelDB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Macan">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Macan's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/%E8%AF%91-Reviewing-LevelDB/" class="post-title-link" itemprop="url">[译] Reviewing LevelDB</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2018-05-12 15:04:39" itemprop="dateCreated datePublished" datetime="2018-05-12T15:04:39+08:00">2018-05-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-05-14 00:54:38" itemprop="dateModified" datetime="2020-05-14T00:54:38+08:00">2020-05-14</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Reviewing-LevelDB"><a href="#Reviewing-LevelDB" class="headerlink" title="Reviewing LevelDB"></a>Reviewing LevelDB</h1><h2 id="I-What-is-this-all-about"><a href="#I-What-is-this-all-about" class="headerlink" title="I. What is this all about"></a>I. What is this all about</h2><p><a target="_blank" rel="noopener" href="https://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about">https://ayende.com/blog/161410/reviewing-leveldb-part-i-what-is-this-all-about</a></p>
-<p>LevelDB是</p>
-<blockquote>
-<p>是Google开发的高速键值对存储库，提供有序的任意字符串之前的键值映射。</p>
-</blockquote>
-<p>这是项目自身给出的定义。LevelDB为用户提供了一种高效存储数据的方式，不是基于SQL的数据库，实际上连真正的数据库也算不上，而只是构建数据库时的一些模块，用来处理对磁盘的读写操作，支持原子性操作。其他的方面则取决于研发人员自己（不管是事务管理还是更复杂的功能）<br>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/05/%E8%AF%91-Reviewing-LevelDB/#more" rel="contents">
+              <a class="btn" href="/2021/07/Daily/2021-07-25/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1676,7 +588,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1742,7 +654,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
