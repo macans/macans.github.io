@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"macans.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="背景 对电梯调度发生兴趣的起源  电梯调度为什么复杂先问是不是，再问为什么。操作系统原理的本科课程一般都会提到 I&#x2F;O 调度问题，多个 I&#x2F;O 请求可能同时到达但磁盘控制器同一时间只能执行一次 I&#x2F;O 操作；不同 I&#x2F;O 操作在磁盘上的远距离会导致磁盘臂的较大移动；磁盘访问时间(Disk Access Time) &#x3D; 寻址时间(Seek Time) + 旋转延迟(Rotational Laten">
+  <meta name="description" content="背景 对电梯调度发生兴趣的起源前公司在 2018 年对办公楼做过一次电梯系统改造，改造后的乘梯体验是：用户选择到达楼层，系统告知几号电梯被呼叫到。  电梯调度为什么复杂先问是不是，再问为什么。操作系统原理的本科课程一般都会提到 I&#x2F;O 调度问题，多个 I&#x2F;O 请求可能同时到达但磁盘控制器同一时间只能执行一次 I&#x2F;O 操作；不同 I&#x2F;O 操作在磁盘上的远距离会导致磁盘臂的较大移动；磁盘访问时间(D">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从电梯调度问题谈起">
+<meta property="og:title" content="当我们乘电梯的时候，我们在乘什么">
 <meta property="og:url" content="https://macans.github.io/macans.github.io/2018/10/%E4%BB%8E%E7%94%B5%E6%A2%AF%E8%B0%83%E5%BA%A6%E9%97%AE%E9%A2%98%E8%B0%88%E8%B5%B7/index.html">
 <meta property="og:site_name" content="Macan&#39;s Blog">
-<meta property="og:description" content="背景 对电梯调度发生兴趣的起源  电梯调度为什么复杂先问是不是，再问为什么。操作系统原理的本科课程一般都会提到 I&#x2F;O 调度问题，多个 I&#x2F;O 请求可能同时到达但磁盘控制器同一时间只能执行一次 I&#x2F;O 操作；不同 I&#x2F;O 操作在磁盘上的远距离会导致磁盘臂的较大移动；磁盘访问时间(Disk Access Time) &#x3D; 寻址时间(Seek Time) + 旋转延迟(Rotational Laten">
+<meta property="og:description" content="背景 对电梯调度发生兴趣的起源前公司在 2018 年对办公楼做过一次电梯系统改造，改造后的乘梯体验是：用户选择到达楼层，系统告知几号电梯被呼叫到。  电梯调度为什么复杂先问是不是，再问为什么。操作系统原理的本科课程一般都会提到 I&#x2F;O 调度问题，多个 I&#x2F;O 请求可能同时到达但磁盘控制器同一时间只能执行一次 I&#x2F;O 操作；不同 I&#x2F;O 操作在磁盘上的远距离会导致磁盘臂的较大移动；磁盘访问时间(D">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-10-23T13:30:23.000Z">
-<meta property="article:modified_time" content="2021-09-13T01:54:46.744Z">
+<meta property="article:modified_time" content="2021-10-27T10:22:00.746Z">
 <meta property="article:author" content="Macan">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>从电梯调度问题谈起 | Macan's Blog</title>
+  <title>当我们乘电梯的时候，我们在乘什么 | Macan's Blog</title>
   
 
 
@@ -175,7 +175,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          从电梯调度问题谈起
+          当我们乘电梯的时候，我们在乘什么
         </h1>
 
         <div class="post-meta">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-09-13 09:54:46" itemprop="dateModified" datetime="2021-09-13T09:54:46+08:00">2021-09-13</time>
+                <time title="Modified: 2021-10-27 18:22:00" itemprop="dateModified" datetime="2021-10-27T18:22:00+08:00">2021-10-27</time>
               </span>
 
           
@@ -207,7 +207,7 @@
 
       
         <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><ul>
-<li>对电梯调度发生兴趣的起源</li>
+<li>对电梯调度发生兴趣的起源前公司在 2018 年对办公楼做过一次电梯系统改造，改造后的乘梯体验是：用户选择到达楼层，系统告知几号电梯被呼叫到。</li>
 </ul>
 <h2 id="电梯调度为什么复杂"><a href="#电梯调度为什么复杂" class="headerlink" title="电梯调度为什么复杂"></a>电梯调度为什么复杂</h2><p>先问是不是，再问为什么。操作系统原理的本科课程一般都会提到 I/O 调度问题，多个 I/O 请求可能同时到达但磁盘控制器同一时间只能执行一次 I/O 操作；不同 I/O 操作在磁盘上的远距离会导致磁盘臂的较大移动；<br>磁盘访问时间(Disk Access Time) = 寻址时间(Seek Time) + 旋转延迟(Rotational Latency) + 数据传输时间(Transfer Time)<br><span id="more"></span>  </p>
 <p>I/O 调度就是为了降低磁盘访问的整体时间，其中的扫描算法(SCAN)也被叫做电梯算法(elevator algorithm)。磁盘臂往一个方向的旋转相当于电梯的上升或下降，</p>
@@ -250,6 +250,7 @@
 </ul>
 <h2 id="其他经典调度问题"><a href="#其他经典调度问题" class="headerlink" title="其他经典调度问题"></a>其他经典调度问题</h2><p>Google 查询 “scheduling problem” 时，排名靠前的是其他，我们也做一些简单的介绍。</p>
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>以上是我对电梯调度及相关问题的简单介绍，</p>
+<p>我觉得，也对这些市场规模相对较小的工程领域充满了敬畏之心。</p>
 <h2 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h2><p>有过算法学习经历的同学一般都了解旅行商问题(Traveling salesman problem)。<br>“给定义一组城市和每对城市间距离，求访问每个城市恰好一次并能回到起始城市的最短路径”</p>
 <ul>
 <li>NP-hard，旅行商问题</li>
@@ -261,8 +262,7 @@
 <li><a target="_blank" rel="noopener" href="https://kuaipan.corp.kuaishou.com/index.php/s/7rtdCPBLwPkLTg0">电梯群控智能控制技术</a></li>
 <li><a href="">The Hidden Sicience of Elevators</a></li>
 </ul>
-<h2 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h2><p>我对电梯调度发生兴趣是前公司在 2018 年对办公楼做过一次电梯系统改造，改造后的交互是：用户选择到达楼层，系统告知几号电梯被呼叫到。</p>
-
+<h2 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h2>
     </div>
 
     
@@ -359,7 +359,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">26</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -401,7 +401,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
