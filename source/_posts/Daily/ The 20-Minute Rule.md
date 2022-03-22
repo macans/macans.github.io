@@ -1,5 +1,5 @@
 ---
-title: '2021/07/25'
+title: The 20 Minute Rule
 p: daily/2021-07-25
 date: 2021-07-25 21:52:49
 tags:

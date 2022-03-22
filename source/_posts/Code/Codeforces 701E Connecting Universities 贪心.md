@@ -1,11 +1,11 @@
 ---
 title: Codeforces 701E Connecting Universities 贪心
 date: 2016-07-24 16:32
-tags: [Codeforces, Greedy]
+tags: [Algorithm, Greedy]
 ---
 
 ### 链接
-> [Codeforces 701E Connecting Universities ](http://codeforces.com/contest/701/problem/E)
+> [Codeforces 701E Connecting Universities](http://codeforces.com/contest/701/problem/E)
 
 <!-- more -->  
 
@@ -16,6 +16,7 @@ tags: [Codeforces, Greedy]
 > 贪心，思路挺巧妙的。首先dfs一遍记录每个点的子树中(包括自己)有多少点是这K个中间的，第二遍dfs时对于每一条边，取两端包含较少的值，这样就保证树中间的点不会被取到，留下的就是相隔更远的点了。方法确实想不到啊。
 
 ### 代码
+
 ```cpp
 #include <iostream>
 #include <cstdio>

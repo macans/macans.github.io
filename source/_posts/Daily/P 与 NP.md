@@ -1,5 +1,5 @@
 ---
-title: '2021/07/24'
+title: P 与 NP
 p: Daily/2021-07-24
 date: 2021-07-24 08:24:01
 tags:
@@ -15,7 +15,7 @@ NP-Complete 问题是指存在一个多项式时间算法能验证当前的答�
 
 听起来 NP-Complete 已经是不可解的问题了，那 NP-Hard 又是什么呢。在字面上的定义是难度至少不小于 NP-Complete。在 Quora 上看到了几个例子来说明这一点，时间问题来不及翻译了，直接 copy-paste 一下吧。
 
---- 
+---
 
 Assume that I have a problem (H) which I *believe* is NP-complete (solution is verifiable in PTIME). Let there be an intermediate step (subroutine S) which must be solved in order to solve for H. If S is said to be NP-complete, then H is at least as hard as S. In fact H is *harder* than S. Thus H is *harder* than a NP-complete problem. So it needs to be in a complexity class of its own and hence H belongs to a class known as the NP-hard class. However note that H is not *strictly* NP-hard. This leads us to conclude that NP-complete is a class of problems that fall under both NP and NP-hard - hardest of the NP problems is NP-complete and the hardest of NP-complete is NP-hard.
 
