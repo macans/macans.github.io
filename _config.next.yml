@@ -36,8 +36,8 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Pisces
-#scheme: Mist
+#scheme: Pisces
+scheme: Mist
 #scheme: Pisces
 #scheme: Gemini
 
@@ -448,7 +448,7 @@ font:
   # Font settings for headlines (<h1> to <h6>).
   headings:
     external: true
-    family: Amazon Ember
+    family: Tahoma
 
   # Font settings for posts (.post-body).
   posts:
