@@ -8,6 +8,7 @@ tags:
 [B ParanoidString](https://codeforces.com/problemset/problem/1694/B)
 
 01 可以替换为 1，10 可以替换为 0。给定一个二进制串，问经过若干次替换后长度是否能变为 1。
+<!-- more -->
 
 ## Solution
 
